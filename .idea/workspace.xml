@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03447da4-1035-42cc-a1ba-efd31399baeb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/FaintDetectionPOC.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/events.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/file_io.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/sessions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/signals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/visualize.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_generation/windows.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
