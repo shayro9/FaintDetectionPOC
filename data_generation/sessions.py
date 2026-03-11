@@ -101,6 +101,32 @@ def _add_orientation_shift(ax, ay, az, rng, fs):
     return ax + ox, ay + oy, az + oz
 
 
+
+
+def _activity_context_blocks(t, fs, rng):
+    """Generate random activity context blocks (sitting/walking/running)."""
+    n = len(t)
+    hr_offset = np.zeros(n)
+    accel_scale = np.ones(n)
+
+    phase_cfg = {
+        "sitting": {"hr": 60.0, "accel_std": 0.05},
+        "walking": {"hr": 90.0, "accel_std": 0.4},
+        "running": {"hr": 140.0, "accel_std": 1.2},
+    }
+
+    idx = 0
+    while idx < n:
+        seg_len = int(rng.integers(20 * fs, 90 * fs))
+        end = min(n, idx + seg_len)
+        phase = rng.choice(["sitting", "walking", "running"], p=[0.3, 0.45, 0.25])
+        cfg = phase_cfg[phase]
+        hr_offset[idx:end] = cfg["hr"]
+        accel_scale[idx:end] = np.interp(cfg["accel_std"], [0.05, 1.2], [0.35, 1.35])
+        idx = end
+
+    return hr_offset, accel_scale
+
 def simulate_session(activity, duration_s=300, fs=FS, user_id=1,
                      seed=None, artifacts=True, logger=None):
     rng     = np.random.default_rng(seed)
@@ -118,6 +144,14 @@ def simulate_session(activity, duration_s=300, fs=FS, user_id=1,
     hr   = sim_hr(  t, profile, rng, fitness=up.fitness) + up.hr_bias
     spo2 = sim_spo2(t, profile, rng)                     + up.spo2_bias
     temp = sim_temp(t, profile, rng, activity=activity)  + up.temp_bias
+
+    if activity != "sleeping":
+        ctx_hr_target, ctx_accel_scale = _activity_context_blocks(t, fs, rng)
+        baseline_hr = float(np.nanmedian(hr))
+        hr += 0.12 * (ctx_hr_target - baseline_hr)
+        ax *= ctx_accel_scale
+        ay *= ctx_accel_scale
+        az = 9.81 + (az - 9.81) * ctx_accel_scale
 
     # ── In-session intensity drift (free-living realism) ─────────────────────
     if activity != "sleeping":
