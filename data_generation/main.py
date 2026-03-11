@@ -40,9 +40,9 @@ def main():
 
     # ── Generate dataset ──────────────────────────────────
     df, event_log = build_dataset(
-        n_normal_sessions = 40,
-        n_event_sessions  = 30,
-        duration_s        = 300,   # 5 minutes per session
+        n_normal_sessions = 200,
+        n_event_sessions  = 80,
+        duration_s        = 600,   # 5 minutes per session
         fs                = FS,
         logger            = logger,
     )

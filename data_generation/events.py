@@ -186,7 +186,7 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
         df.iloc[i2:i3, cols[col]] = smooth_noise(rng, n_rec, 1.0, kernel=8) * gyro_scale
 
     # Soften phase boundaries to avoid hard corners between event segments.
-    blend_len = max(3, int(fs * 1.5))
+    blend_len = max(3, int(fs * rng.uniform(0.5, 4.0)))
     for signal in ("heart_rate", "spo2", "skin_temp"):
         pre = df.iloc[i0:i1, cols[signal]].values
         sync = df.iloc[i1:i2, cols[signal]].values
