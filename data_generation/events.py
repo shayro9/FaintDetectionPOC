@@ -10,6 +10,9 @@ def approach(target, start, t, tau=0.4):
 
 def blend_transition(arr_a, arr_b, blend_len):
     """Softly blend boundary between two contiguous signal segments."""
+    arr_a = arr_a.copy()
+    arr_b = arr_b.copy()
+
     if blend_len <= 0:
         return arr_a, arr_b
 
