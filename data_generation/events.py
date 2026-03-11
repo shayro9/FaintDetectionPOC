@@ -8,6 +8,19 @@ def approach(target, start, t, tau=0.4):
     return target + (start - target) * np.exp(-t / tau)
 
 
+def blend_transition(arr_a, arr_b, blend_len):
+    """Softly blend boundary between two contiguous signal segments."""
+    if blend_len <= 0:
+        return arr_a, arr_b
+
+    blend_len = min(blend_len, len(arr_a), len(arr_b))
+    alpha = np.linspace(0.0, 1.0, blend_len)
+    blended = arr_a[-blend_len:] * (1.0 - alpha) + arr_b[:blend_len] * alpha
+    arr_a[-blend_len:] = blended
+    arr_b[:blend_len] = blended
+    return arr_a, arr_b
+
+
 def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     """Inject a multiphase fainting event into a session DataFrame."""
     if rng is None:
@@ -133,7 +146,9 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
 
     temp_at_syncope_start = baseline_temp - 0.8
     temp_at_syncope_end = baseline_temp - 1.2
-    df.iloc[i1:i2, cols["skin_temp"]] = np.linspace(temp_at_syncope_start, temp_at_syncope_end, n_sync)
+    df.iloc[i1:i2, cols["skin_temp"]] = approach(
+        temp_at_syncope_end, temp_at_syncope_start, t_sync, tau=0.8
+    )
 
     df.iloc[i1:i2, cols["label"]] = "syncope"
     df.iloc[i1:i2, cols["event_phase"]] = "syncope"
@@ -144,8 +159,10 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
 
     rec_hr_start = float(df.iloc[i2 - 1, cols["heart_rate"]])
     hr_recovery = approach(baseline_hr, rec_hr_start, t_rec, tau=0.9)
+    mayer_wave = 1.8 * np.sin(2.0 * np.pi * 0.1 * t_rec + rng.uniform(0.0, 2.0 * np.pi))
+    rsa_wave = 1.2 * np.sin(2.0 * np.pi * 0.24 * t_rec + rng.uniform(0.0, 2.0 * np.pi))
     rec_move = np.clip(np.linspace(0.02, 0.20, n_rec) * variant_cfg["movement"], 0.0, 0.5)
-    hr_recovery = hr_recovery + rec_move * 5.0
+    hr_recovery = hr_recovery + rec_move * 5.0 + mayer_wave + rsa_wave
     df.iloc[i2:i3, cols["heart_rate"]] = hr_recovery + smooth_noise(rng, n_rec, 0.8, kernel=10)
 
     rec_spo2_start = float(df.iloc[i2 - 1, cols["spo2"]])
@@ -153,7 +170,8 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     spo2_recovery = spo2_recovery - 0.03 * (baseline_hr - hr_recovery)
     df.iloc[i2:i3, cols["spo2"]] = np.clip(spo2_recovery + smooth_noise(rng, n_rec, 0.2, kernel=12), None, 99.0)
 
-    df.iloc[i2:i3, cols["skin_temp"]] = temp_at_syncope_end + (baseline_temp - temp_at_syncope_end) * np.linspace(0, 1, n_rec)
+    temp_recovery = approach(baseline_temp, temp_at_syncope_end, t_rec, tau=2.4)
+    df.iloc[i2:i3, cols["skin_temp"]] = temp_recovery + smooth_noise(rng, n_rec, 0.03, kernel=14)
 
     micro = smooth_noise(rng, n_rec, 0.02, kernel=20)
     df.iloc[i2:i3, cols["accel_x"]] = gravity[0] + micro
@@ -163,6 +181,20 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     gyro_scale = np.linspace(lying_std, lying_std * 1.8, n_rec)
     for col in ("gyro_x", "gyro_y", "gyro_z"):
         df.iloc[i2:i3, cols[col]] = smooth_noise(rng, n_rec, 1.0, kernel=8) * gyro_scale
+
+    # Soften phase boundaries to avoid hard corners between event segments.
+    blend_len = max(3, int(fs * 1.5))
+    for signal in ("heart_rate", "spo2", "skin_temp"):
+        pre = df.iloc[i0:i1, cols[signal]].values
+        sync = df.iloc[i1:i2, cols[signal]].values
+        rec = df.iloc[i2:i3, cols[signal]].values
+
+        pre, sync = blend_transition(pre, sync, blend_len)
+        sync, rec = blend_transition(sync, rec, blend_len)
+
+        df.iloc[i0:i1, cols[signal]] = pre
+        df.iloc[i1:i2, cols[signal]] = sync
+        df.iloc[i2:i3, cols[signal]] = rec
 
     df.iloc[i2:i3, cols["label"]] = "recovery"
     df.iloc[i2:i3, cols["event_phase"]] = "recovery"
