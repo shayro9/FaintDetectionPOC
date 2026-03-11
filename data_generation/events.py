@@ -22,6 +22,7 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
 
     df = df.copy()
     total_samples = len(df)
+    cols = {c: df.columns.get_loc(c) for c in df.columns}
 
     pre_dur  = int(rng.integers(20, 51))
     sync_dur = int(rng.integers(5,  21))
@@ -61,31 +62,31 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     #     then sudden vagal withdrawal crash.
     # The cap prevents the running+high-fitness combination from producing
     # impossible values (>190 bpm) before the person even collapses.
-    current_hr  = df.iloc[i0:i1, df.columns.get_loc("heart_rate")].values.copy()
+    current_hr  = df.iloc[i0:i1, cols["heart_rate"]].values.copy()
     split       = int(0.60 * n_pre)
     hr_mod      = np.empty(n_pre)
     hr_mod[:split]  = 15.0 * np.linspace(0.0, 1.0, split)
     hr_mod[split:]  = 15.0 - 65.0 * np.linspace(0.0, 1.0, n_pre - split)
     new_hr      = np.clip(current_hr + hr_mod, None, 185.0)
-    df.iloc[i0:i1, df.columns.get_loc("heart_rate")] = new_hr
+    df.iloc[i0:i1, cols["heart_rate"]] = new_hr
 
     # SpO2: gradual drop (−4%)
-    df.iloc[i0:i1, df.columns.get_loc("spo2")] -= 4.0 * t_pre
+    df.iloc[i0:i1, cols["spo2"]] -= 4.0 * t_pre
 
     # Temp: gradual peripheral vasoconstriction ramp (not a step)
-    df.iloc[i0:i1, df.columns.get_loc("skin_temp")] -= 0.8 * t_pre
+    df.iloc[i0:i1, cols["skin_temp"]] -= 0.8 * t_pre
 
     # Accel: increasing tremor
     tremor = np.linspace(0, 0.6, n_pre)
-    df.iloc[i0:i1, df.columns.get_loc("accel_x")] += rng.normal(0, 1.0, n_pre) * tremor
-    df.iloc[i0:i1, df.columns.get_loc("accel_y")] += rng.normal(0, 1.0, n_pre) * tremor * 0.7
+    df.iloc[i0:i1, cols["accel_x"]] += rng.normal(0, 1.0, n_pre) * tremor
+    df.iloc[i0:i1, cols["accel_y"]] += rng.normal(0, 1.0, n_pre) * tremor * 0.7
 
     # Gyro: erratic rotations building up — additive on existing signal
-    df.iloc[i0:i1, df.columns.get_loc("gyro_x")] += rng.normal(0, 0.5, n_pre) * tremor
-    df.iloc[i0:i1, df.columns.get_loc("gyro_y")] += rng.normal(0, 0.5, n_pre) * tremor
+    df.iloc[i0:i1, cols["gyro_x"]] += rng.normal(0, 0.5, n_pre) * tremor
+    df.iloc[i0:i1, cols["gyro_y"]] += rng.normal(0, 0.5, n_pre) * tremor
 
-    df.iloc[i0:i1, df.columns.get_loc("label")]       = "pre_syncope"
-    df.iloc[i0:i1, df.columns.get_loc("event_phase")] = "pre_syncope"
+    df.iloc[i0:i1, cols["label"]]       = "pre_syncope"
+    df.iloc[i0:i1, cols["event_phase"]] = "pre_syncope"
 
     # ── SYNCOPE (FALL + UNCONSCIOUS) ──────────────────────────────────────────
     n_sync = i2 - i1
@@ -99,9 +100,17 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     # Accel fall spike then dead-still
     fall_x = np.zeros(n_sync)
     fall_x[:fall_len] = fall_profile[:fall_len] * scale
-    df.iloc[i1:i2, df.columns.get_loc("accel_x")] = fall_x + rng.normal(0, 0.04, n_sync)
-    df.iloc[i1:i2, df.columns.get_loc("accel_y")] = rng.normal(0, 0.04, n_sync)
-    df.iloc[i1:i2, df.columns.get_loc("accel_z")] = 9.81 + rng.normal(0, 0.03, n_sync)
+    post_fall_jerks = np.zeros(n_sync)
+    n_jerks = int(rng.integers(1, 4))
+    if n_sync - fall_len > 5:
+        jerk_idx = rng.choice(np.arange(fall_len + 2, n_sync), size=n_jerks, replace=False)
+        post_fall_jerks[jerk_idx] = rng.uniform(0.3, 0.9, size=n_jerks)
+    df.iloc[i1:i2, cols["accel_x"]] = fall_x + post_fall_jerks + rng.normal(0, 0.04, n_sync)
+    df.iloc[i1:i2, cols["accel_y"]] = 0.4 * post_fall_jerks + rng.normal(0, 0.04, n_sync)
+
+    # Transition watch orientation toward a sideways/lying position after impact.
+    orient_shift = np.linspace(9.81, 9.20 + rng.normal(0, 0.05), n_sync)
+    df.iloc[i1:i2, cols["accel_z"]] = orient_shift + rng.normal(0, 0.03, n_sync)
 
     # Gyro: fall spike on ALL three axes then near-zero lying-still noise.
     # Previously only gyro_x got the spike; gyro_y/z went from running amplitude
@@ -112,22 +121,28 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     for col, spike_scale in [("gyro_x", 0.40), ("gyro_y", 0.25), ("gyro_z", 0.15)]:
         spike = np.zeros(n_sync)
         spike[:fall_len] = fall_profile[:fall_len] * spike_scale * scale
-        df.iloc[i1:i2, df.columns.get_loc(col)] = spike + rng.normal(0, lying_std, n_sync)
+        df.iloc[i1:i2, cols[col]] = spike + 0.5 * post_fall_jerks + rng.normal(0, lying_std, n_sync)
 
-    df.iloc[i1:i2, df.columns.get_loc("heart_rate")] = 40 + rng.normal(0, 2, n_sync)
-    df.iloc[i1:i2, df.columns.get_loc("spo2")]        = 89 + rng.normal(0, 0.6, n_sync)
+    # Vitals do not flatten instantly; they deteriorate over the syncope window.
+    hr_start = max(45.0, float(new_hr[-1]))
+    hr_sync = hr_start - (hr_start - 40.0) * (1 - np.exp(-6 * np.linspace(0, 1, n_sync)))
+    df.iloc[i1:i2, cols["heart_rate"]] = hr_sync + rng.normal(0, 1.8, n_sync)
+
+    spo2_nadir = rng.uniform(87.5, 89.5)
+    spo2_sync = (baseline_spo2 - 4.0) - ((baseline_spo2 - 4.0) - spo2_nadir) * (1 - np.exp(-4 * np.linspace(0, 1, n_sync)))
+    df.iloc[i1:i2, cols["spo2"]] = spo2_sync + rng.normal(0, 0.5, n_sync)
 
     # Temp: ramp down across the syncope window instead of a sudden step.
     # The pre_syncope ended at baseline_temp - 0.8; continue ramping to -1.2
     # total so the decline is continuous.
     temp_at_syncope_start = baseline_temp - 0.8
     temp_at_syncope_end   = baseline_temp - 1.2
-    df.iloc[i1:i2, df.columns.get_loc("skin_temp")] = np.linspace(
+    df.iloc[i1:i2, cols["skin_temp"]] = np.linspace(
         temp_at_syncope_start, temp_at_syncope_end, n_sync
     )
 
-    df.iloc[i1:i2, df.columns.get_loc("label")]       = "syncope"
-    df.iloc[i1:i2, df.columns.get_loc("event_phase")] = "syncope"
+    df.iloc[i1:i2, cols["label"]]       = "syncope"
+    df.iloc[i1:i2, cols["event_phase"]] = "syncope"
 
     # ── RECOVERY ──────────────────────────────────────────────────────────────
     n_rec = i3 - i2
@@ -137,27 +152,27 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
     hr_recovery = 40.0 + (baseline_hr - 40.0) * (
         1 / (1 + np.exp(-8 * (t_rec - 0.4)))
     )
-    df.iloc[i2:i3, df.columns.get_loc("heart_rate")] = (
+    df.iloc[i2:i3, cols["heart_rate"]] = (
         hr_recovery + rng.normal(0, 3, n_rec)
     )
 
     # SpO2: linear recovery to baseline
-    df.iloc[i2:i3, df.columns.get_loc("spo2")] = np.clip(
-        89.0 + (baseline_spo2 - 89.0) * t_rec + rng.normal(0, 0.4, n_rec),
+    df.iloc[i2:i3, cols["spo2"]] = np.clip(
+        spo2_nadir + (baseline_spo2 - spo2_nadir) * (t_rec ** 0.8) + rng.normal(0, 0.4, n_rec),
         None, 99.0
     )
 
     # Temp: linear recovery from syncope floor to baseline
-    df.iloc[i2:i3, df.columns.get_loc("skin_temp")] = (
+    df.iloc[i2:i3, cols["skin_temp"]] = (
         temp_at_syncope_end + (baseline_temp - temp_at_syncope_end) * t_rec
     )
 
     # Accel: lying still with micro-movements returning in second half
     micro = np.zeros(n_rec)
     micro[n_rec//2:] = rng.normal(0, 0.05, n_rec - n_rec//2) * t_rec[n_rec//2:]
-    df.iloc[i2:i3, df.columns.get_loc("accel_x")] = micro
-    df.iloc[i2:i3, df.columns.get_loc("accel_y")] = rng.normal(0, 0.02, n_rec)
-    df.iloc[i2:i3, df.columns.get_loc("accel_z")] = 9.81 + rng.normal(0, 0.02, n_rec)
+    df.iloc[i2:i3, cols["accel_x"]] = micro
+    df.iloc[i2:i3, cols["accel_y"]] = rng.normal(0, 0.02, n_rec)
+    df.iloc[i2:i3, cols["accel_z"]] = (9.2 + 0.5 * t_rec) + rng.normal(0, 0.02, n_rec)
 
     # Gyro: lying-still noise throughout, micro-movements building in second half.
     # Use the same lying_std as syncope so there's no amplitude jump at the
@@ -168,10 +183,10 @@ def plant_faint_event(df, event_start_s, fs=FS, rng=None, logger=None):
         lying_std                    # flat lying-still floor
     )
     for col in ("gyro_x", "gyro_y", "gyro_z"):
-        df.iloc[i2:i3, df.columns.get_loc(col)] = rng.normal(0, 1, n_rec) * gyro_scale
+        df.iloc[i2:i3, cols[col]] = rng.normal(0, 1, n_rec) * gyro_scale
 
-    df.iloc[i2:i3, df.columns.get_loc("label")]       = "recovery"
-    df.iloc[i2:i3, df.columns.get_loc("event_phase")] = "recovery"
+    df.iloc[i2:i3, cols["label"]]       = "recovery"
+    df.iloc[i2:i3, cols["event_phase"]] = "recovery"
 
     if logger:
         logger.debug(
