@@ -16,6 +16,12 @@ def lowpass(sig, cutoff=10.0, fs=FS, order=4):
     return filtfilt(b, a, sig)
 
 
+
+
+def smooth_noise(rng, n, scale=1.0, kernel=20):
+    x = rng.normal(0, scale, n)
+    return np.convolve(x, np.ones(kernel) / kernel, mode="same")
+
 def _thermal_lag(sig, tau_s: float, fs: int = FS) -> np.ndarray:
     """
     Simulate physiological thermal lag with a first-order IIR low-pass.
@@ -93,9 +99,16 @@ def add_motion_artifacts(hr, spo2, ax, ay, az, rng, fs=FS):
 
     noise_scale = np.interp(motion_env, [0, 2, 10], [0.10, 1.50, 4.00])
 
-    hr_out   = hr   + rng.normal(0, 1.0,  len(hr))   * noise_scale
+    hr_out   = hr   + smooth_noise(rng, len(hr), 1.0, kernel=12) * noise_scale
     # SpO2 dips slightly under heavy motion (optical interference)
-    spo2_out = spo2 - np.abs(rng.normal(0, 0.15, len(spo2))) * (noise_scale / 4.0)
+    spo2_out = spo2 - np.abs(smooth_noise(rng, len(spo2), 0.15, kernel=12)) * (noise_scale / 4.0)
+
+    if rng.random() < 0.05:
+        motion_high = np.where(motion_env > 1.5)[0]
+        if len(motion_high) > 0:
+            idx = int(rng.choice(motion_high))
+            span = min(len(hr_out) - idx, int(rng.integers(fs // 4, fs)))
+            hr_out[idx:idx + span] += rng.uniform(12, 24)
 
     return hr_out, np.clip(spo2_out, 90.0, 100.0)
 
@@ -118,9 +131,9 @@ def sim_accel(t, activity, profile, rng, cadence_bias=0.0):
     br = profile["breathing_rate"] / 60.0
 
     if activity == "sleeping":
-        x = 0.01 * np.sin(2*np.pi*br*t) + rng.normal(0, p["noise_std"], n)
-        y = 0.01 * np.cos(2*np.pi*br*t) + rng.normal(0, p["noise_std"], n)
-        z = p["gravity_val"] + 0.015*np.sin(2*np.pi*br*t) + rng.normal(0, p["noise_std"], n)
+        x = 0.01 * np.sin(2*np.pi*br*t) + smooth_noise(rng, n, p["noise_std"], kernel=24)
+        y = 0.01 * np.cos(2*np.pi*br*t) + smooth_noise(rng, n, p["noise_std"], kernel=24)
+        z = p["gravity_val"] + 0.015*np.sin(2*np.pi*br*t) + smooth_noise(rng, n, p["noise_std"], kernel=24)
     else:
         f = p["cadence_hz"] + cadence_bias
         A = p["amplitude"]
@@ -129,14 +142,18 @@ def sim_accel(t, activity, profile, rng, cadence_bias=0.0):
         x = (A       * np.sin(2*np.pi*f*t)
              + 0.4*A * np.abs(np.sin(np.pi*f*t))    # ← sharp heel-strike peak
              + 0.1*A * np.sin(2*np.pi*3*f*t + 0.6)
-             + rng.normal(0, p["noise_std"], n))
+             + smooth_noise(rng, n, p["noise_std"], kernel=16))
         y = (0.4*A   * np.sin(2*np.pi*f*t + np.pi/3)
              + 0.15*A * np.sin(2*np.pi*2*f*t + 0.5)
-             + rng.normal(0, p["noise_std"], n))
+             + smooth_noise(rng, n, p["noise_std"], kernel=16))
         z = (p["gravity_val"]
              + 0.5*A * np.sin(2*np.pi*f*t + np.pi/2)
              + 0.02  * np.sin(2*np.pi*br*t)
-             + rng.normal(0, p["noise_std"], n))
+             + smooth_noise(rng, n, p["noise_std"], kernel=16))
+
+    sampling_rate = FS
+    breathing = 0.03 * np.sin(2 * np.pi * 0.25 * (np.arange(n) / sampling_rate))
+    z += breathing
 
     return lowpass(x, 20), lowpass(y, 20), lowpass(z, 20)
 
@@ -152,21 +169,21 @@ def sim_gyro(t, activity, profile, rng, cadence_bias=0.0):
     n = len(t)
 
     if activity == "sleeping":
-        gx = rng.normal(0, p["noise_std"], n)
-        gy = rng.normal(0, p["noise_std"], n)
-        gz = rng.normal(0, p["noise_std"], n)
+        gx = smooth_noise(rng, n, p["noise_std"], kernel=20)
+        gy = smooth_noise(rng, n, p["noise_std"], kernel=20)
+        gz = smooth_noise(rng, n, p["noise_std"], kernel=20)
     else:
         f  = profile["accel"]["cadence_hz"] + cadence_bias
         A  = p["amplitude"]
-        gx = lowpass(A     * np.cos(2*np.pi*f*t)       + rng.normal(0, p["noise_std"], n), 15)
-        gy = lowpass(0.5*A * np.cos(2*np.pi*f*t + 0.4) + rng.normal(0, p["noise_std"], n), 15)
-        gz = lowpass(0.3*A * np.sin(2*np.pi*f*t + 0.8) + rng.normal(0, p["noise_std"], n), 15)
+        gx = lowpass(A     * np.cos(2*np.pi*f*t)       + smooth_noise(rng, n, p["noise_std"], kernel=14), 15)
+        gy = lowpass(0.5*A * np.cos(2*np.pi*f*t + 0.4) + smooth_noise(rng, n, p["noise_std"], kernel=14), 15)
+        gz = lowpass(0.3*A * np.sin(2*np.pi*f*t + 0.8) + smooth_noise(rng, n, p["noise_std"], kernel=14), 15)
 
     # Slow integration drift (random walk) — magnitude calibrated to typical
     # consumer MEMS gyros (~0.05 °/s/√Hz bias instability)
-    drift_x = np.cumsum(rng.normal(0, 0.0008, n))
-    drift_y = np.cumsum(rng.normal(0, 0.0008, n))
-    drift_z = np.cumsum(rng.normal(0, 0.0005, n))
+    drift_x = np.cumsum(rng.normal(0, 0.005, n))
+    drift_y = np.cumsum(rng.normal(0, 0.005, n))
+    drift_z = np.cumsum(rng.normal(0, 0.005, n))
 
     return gx + drift_x, gy + drift_y, gz + drift_z
 
@@ -214,7 +231,8 @@ def sim_hr(t, profile, rng, fitness=1.0):
     mayer = 3.0 * np.sin(2*np.pi*0.10*t)      # Mayer waves (~0.10 Hz sympathetic)
     slow  = 3.0 * np.sin(2*np.pi*0.005*t)     # very-low-frequency thermoregulatory drift
 
-    hr = hr + rsa + mayer + slow
+    hr_drift = np.cumsum(rng.normal(0, 0.005, len(t)))
+    hr = hr + rsa + mayer + slow + hr_drift + smooth_noise(rng, len(t), p["std"] * 0.3, kernel=30)
     return np.clip(hr, p["mean"] - 25, p["mean"] + 25)
 
 
@@ -232,11 +250,17 @@ def sim_spo2(t, profile, rng):
 
     # Breathing oscillation — inverted phase: SpO₂ dips slightly at peak inspiration
     breathing_osc = 0.5 * np.sin(2*np.pi*br*t + np.pi)
-    slow_wander   = rng.normal(0, p["std"] * 0.3, n)
-    noise         = rng.normal(0, p["std"] * 0.5, n)
+    slow_wander   = smooth_noise(rng, n, p["std"] * 0.3, kernel=80)
+    noise         = smooth_noise(rng, n, p["std"] * 0.5, kernel=25)
 
     base = p["mean"] + breathing_osc + slow_wander + noise
-    return np.clip(lowpass(base, 0.5), 90.0, 100.0)
+    spo2 = np.clip(lowpass(base, 0.5), 90.0, 100.0)
+
+    if rng.random() < 0.05 and n > 100:
+        start = int(rng.integers(0, n - 100))
+        spo2[start:start + 100] = np.nan
+
+    return spo2
 
 
 def sim_temp(t, profile, rng, activity="walking"):
@@ -254,8 +278,10 @@ def sim_temp(t, profile, rng, activity="walking"):
     # Instantaneous "target" temperature (what a perfect deep-tissue sensor would see)
     target = (p["mean"]
               + 0.1 * np.sin(2*np.pi*0.003*t)
-              + rng.normal(0, p["std"] * 0.5, n))
+              + smooth_noise(rng, n, p["std"] * 0.5, kernel=40))
     target = lowpass(target, 0.02)
 
     tau_s = 120.0 if activity != "sleeping" else 300.0
-    return _thermal_lag(target, tau_s)
+    temp = _thermal_lag(target, tau_s)
+    temp += np.cumsum(rng.normal(0, 0.005, n)) * 0.02
+    return temp
