@@ -1,0 +1,138 @@
+2026-03-11 15:57:29 | INFO     | ============================================================
+2026-03-11 15:57:29 | INFO     |   Smartwatch Sensor Data Simulator
+2026-03-11 15:57:29 | INFO     |   Run started: 2026-03-11 15:57:29
+2026-03-11 15:57:29 | INFO     | ============================================================
+2026-03-11 15:57:29 | INFO     | Building dataset | normal=40 event=30 duration=300s
+2026-03-11 15:57:29 | INFO     | Generating 40 normal sessions …
+2026-03-11 15:57:29 | DEBUG    |   Session | user=13 activity=sleeping duration=300s seed=51113 HR_base=47.4 fitness=1.00 cadence_bias=-0.13 spo2_bias=+1.21
+2026-03-11 15:57:30 | DEBUG    |   Session | user=7 activity=walking duration=300s seed=4097 HR_base=88.5 fitness=1.12 cadence_bias=-0.10 spo2_bias=+0.14
+2026-03-11 15:57:30 | DEBUG    |   Session | user=1 activity=walking duration=300s seed=17526 HR_base=103.6 fitness=1.26 cadence_bias=-0.42 spo2_bias=-0.31
+2026-03-11 15:57:30 | DEBUG    |   Session | user=13 activity=sleeping duration=300s seed=91275 HR_base=47.4 fitness=1.00 cadence_bias=-0.13 spo2_bias=+1.21
+2026-03-11 15:57:30 | DEBUG    |   Session | user=13 activity=running duration=300s seed=97074 HR_base=147.4 fitness=1.00 cadence_bias=-0.13 spo2_bias=+1.21
+2026-03-11 15:57:30 | DEBUG    |   Session | user=13 activity=sleeping duration=300s seed=54362 HR_base=47.4 fitness=1.00 cadence_bias=-0.13 spo2_bias=+1.21
+2026-03-11 15:57:30 | DEBUG    |   Session | user=19 activity=running duration=300s seed=27734 HR_base=156.5 fitness=0.77 cadence_bias=+0.02 spo2_bias=+1.30
+2026-03-11 15:57:30 | DEBUG    |   Session | user=14 activity=sleeping duration=300s seed=273 HR_base=63.8 fitness=0.86 cadence_bias=+0.10 spo2_bias=+1.15
+2026-03-11 15:57:30 | DEBUG    |   Session | user=18 activity=running duration=300s seed=55431 HR_base=163.5 fitness=0.72 cadence_bias=+0.18 spo2_bias=-0.25
+2026-03-11 15:57:30 | DEBUG    |   Session | user=16 activity=walking duration=300s seed=72965 HR_base=93.9 fitness=0.73 cadence_bias=+0.04 spo2_bias=-0.70
+2026-03-11 15:57:30 | INFO     |   Normal sessions: 10/40
+2026-03-11 15:57:30 | DEBUG    |   Session | user=4 activity=sleeping duration=300s seed=8928 HR_base=59.1 fitness=0.64 cadence_bias=-0.08 spo2_bias=-0.06
+2026-03-11 15:57:30 | DEBUG    |   Session | user=1 activity=sleeping duration=300s seed=54146 HR_base=63.6 fitness=1.26 cadence_bias=-0.42 spo2_bias=-0.31
+2026-03-11 15:57:30 | DEBUG    |   Session | user=6 activity=walking duration=300s seed=48106 HR_base=104.1 fitness=0.73 cadence_bias=-0.17 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Session | user=9 activity=running duration=300s seed=2831 HR_base=152.3 fitness=1.16 cadence_bias=+0.05 spo2_bias=+0.39
+2026-03-11 15:57:30 | DEBUG    |   Session | user=3 activity=walking duration=300s seed=828 HR_base=103.9 fitness=1.35 cadence_bias=-0.12 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Session | user=11 activity=sleeping duration=300s seed=64718 HR_base=70.0 fitness=0.74 cadence_bias=-0.30 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Session | user=13 activity=walking duration=300s seed=76405 HR_base=87.4 fitness=1.00 cadence_bias=-0.13 spo2_bias=+1.21
+2026-03-11 15:57:30 | DEBUG    |   Session | user=10 activity=running duration=300s seed=99720 HR_base=151.1 fitness=0.77 cadence_bias=-0.39 spo2_bias=-0.67
+2026-03-11 15:57:30 | DEBUG    |   Session | user=20 activity=sleeping duration=300s seed=37952 HR_base=63.1 fitness=1.40 cadence_bias=-0.25 spo2_bias=-0.86
+2026-03-11 15:57:30 | DEBUG    |   Session | user=20 activity=sleeping duration=300s seed=65045 HR_base=63.1 fitness=1.40 cadence_bias=-0.25 spo2_bias=-0.86
+2026-03-11 15:57:30 | INFO     |   Normal sessions: 20/40
+2026-03-11 15:57:30 | DEBUG    |   Session | user=14 activity=sleeping duration=300s seed=70400 HR_base=63.8 fitness=0.86 cadence_bias=+0.10 spo2_bias=+1.15
+2026-03-11 15:57:30 | DEBUG    |   Session | user=18 activity=running duration=300s seed=13509 HR_base=163.5 fitness=0.72 cadence_bias=+0.18 spo2_bias=-0.25
+2026-03-11 15:57:30 | DEBUG    |   Session | user=15 activity=running duration=300s seed=84548 HR_base=165.0 fitness=1.38 cadence_bias=-0.07 spo2_bias=+0.13
+2026-03-11 15:57:30 | DEBUG    |   Session | user=8 activity=running duration=300s seed=31024 HR_base=160.9 fitness=0.64 cadence_bias=-0.06 spo2_bias=+0.90
+2026-03-11 15:57:30 | DEBUG    |   Session | user=10 activity=running duration=300s seed=71882 HR_base=151.1 fitness=0.77 cadence_bias=-0.39 spo2_bias=-0.67
+2026-03-11 15:57:30 | DEBUG    |   Session | user=2 activity=sleeping duration=300s seed=93404 HR_base=67.6 fitness=1.39 cadence_bias=-0.20 spo2_bias=-1.71
+2026-03-11 15:57:30 | DEBUG    |   Session | user=8 activity=running duration=300s seed=67273 HR_base=160.9 fitness=0.64 cadence_bias=-0.06 spo2_bias=+0.90
+2026-03-11 15:57:30 | DEBUG    |   Session | user=6 activity=running duration=300s seed=32186 HR_base=164.1 fitness=0.73 cadence_bias=-0.17 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Session | user=12 activity=sleeping duration=300s seed=50441 HR_base=47.4 fitness=1.13 cadence_bias=+0.46 spo2_bias=-0.13
+2026-03-11 15:57:30 | DEBUG    |   Session | user=16 activity=running duration=300s seed=39161 HR_base=153.9 fitness=0.73 cadence_bias=+0.04 spo2_bias=-0.70
+2026-03-11 15:57:30 | INFO     |   Normal sessions: 30/40
+2026-03-11 15:57:30 | DEBUG    |   Session | user=18 activity=walking duration=300s seed=26392 HR_base=103.5 fitness=0.72 cadence_bias=+0.18 spo2_bias=-0.25
+2026-03-11 15:57:30 | DEBUG    |   Session | user=15 activity=walking duration=300s seed=62318 HR_base=105.0 fitness=1.38 cadence_bias=-0.07 spo2_bias=+0.13
+2026-03-11 15:57:30 | DEBUG    |   Session | user=2 activity=walking duration=300s seed=37713 HR_base=107.6 fitness=1.39 cadence_bias=-0.20 spo2_bias=-1.71
+2026-03-11 15:57:30 | DEBUG    |   Session | user=9 activity=sleeping duration=300s seed=78709 HR_base=52.3 fitness=1.16 cadence_bias=+0.05 spo2_bias=+0.39
+2026-03-11 15:57:30 | DEBUG    |   Session | user=5 activity=walking duration=300s seed=79168 HR_base=94.5 fitness=0.84 cadence_bias=-0.01 spo2_bias=-0.59
+2026-03-11 15:57:30 | DEBUG    |   Session | user=2 activity=sleeping duration=300s seed=5856 HR_base=67.6 fitness=1.39 cadence_bias=-0.20 spo2_bias=-1.71
+2026-03-11 15:57:30 | DEBUG    |   Session | user=7 activity=sleeping duration=300s seed=57364 HR_base=48.5 fitness=1.12 cadence_bias=-0.10 spo2_bias=+0.14
+2026-03-11 15:57:30 | DEBUG    |   Session | user=18 activity=walking duration=300s seed=45033 HR_base=103.5 fitness=0.72 cadence_bias=+0.18 spo2_bias=-0.25
+2026-03-11 15:57:30 | DEBUG    |   Session | user=16 activity=sleeping duration=300s seed=70534 HR_base=53.9 fitness=0.73 cadence_bias=+0.04 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Session | user=16 activity=walking duration=300s seed=5202 HR_base=93.9 fitness=0.73 cadence_bias=+0.04 spo2_bias=-0.70
+2026-03-11 15:57:30 | INFO     |   Normal sessions: 40/40
+2026-03-11 15:57:30 | INFO     | Generating 30 sessions with faint events …
+2026-03-11 15:57:30 | DEBUG    |   Session | user=9 activity=running duration=300s seed=99664 HR_base=152.3 fitness=1.16 cadence_bias=+0.05 spo2_bias=+0.39
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=63s pre=49s sync=6s rec=71s total_event=126s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=7 activity=running duration=300s seed=27170 HR_base=148.5 fitness=1.12 cadence_bias=-0.10 spo2_bias=+0.14
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=71s pre=49s sync=5s rec=43s total_event=97s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=16 activity=walking duration=300s seed=63082 HR_base=93.9 fitness=0.73 cadence_bias=+0.04 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=70s pre=33s sync=9s rec=46s total_event=88s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=3 activity=walking duration=300s seed=15342 HR_base=103.9 fitness=1.35 cadence_bias=-0.12 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=60s pre=38s sync=19s rec=78s total_event=135s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=3 activity=walking duration=300s seed=79047 HR_base=103.9 fitness=1.35 cadence_bias=-0.12 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=69s pre=35s sync=8s rec=59s total_event=102s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=11 activity=walking duration=300s seed=90872 HR_base=110.0 fitness=0.74 cadence_bias=-0.30 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=66s pre=20s sync=20s rec=59s total_event=99s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=19 activity=walking duration=300s seed=14828 HR_base=96.5 fitness=0.77 cadence_bias=+0.02 spo2_bias=+1.30
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=79s pre=35s sync=10s rec=80s total_event=125s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=11 activity=walking duration=300s seed=97785 HR_base=110.0 fitness=0.74 cadence_bias=-0.30 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=76s pre=20s sync=16s rec=78s total_event=114s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=12 activity=running duration=300s seed=1359 HR_base=147.4 fitness=1.13 cadence_bias=+0.46 spo2_bias=-0.13
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=67s pre=25s sync=11s rec=64s total_event=100s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=18 activity=running duration=300s seed=26884 HR_base=163.5 fitness=0.72 cadence_bias=+0.18 spo2_bias=-0.25
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=74s pre=25s sync=14s rec=64s total_event=103s
+2026-03-11 15:57:30 | INFO     |   Event sessions: 10/30
+2026-03-11 15:57:30 | DEBUG    |   Session | user=14 activity=running duration=300s seed=67354 HR_base=163.8 fitness=0.86 cadence_bias=+0.10 spo2_bias=+1.15
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=63s pre=39s sync=10s rec=73s total_event=122s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=6 activity=walking duration=300s seed=75628 HR_base=104.1 fitness=0.73 cadence_bias=-0.17 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=76s pre=32s sync=8s rec=55s total_event=95s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=9 activity=running duration=300s seed=24284 HR_base=152.3 fitness=1.16 cadence_bias=+0.05 spo2_bias=+0.39
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=78s pre=38s sync=8s rec=44s total_event=90s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=17 activity=running duration=300s seed=44980 HR_base=143.3 fitness=0.95 cadence_bias=+0.21 spo2_bias=+0.15
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=60s pre=31s sync=11s rec=50s total_event=92s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=7 activity=running duration=300s seed=43264 HR_base=148.5 fitness=1.12 cadence_bias=-0.10 spo2_bias=+0.14
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=71s pre=37s sync=19s rec=49s total_event=105s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=15 activity=walking duration=300s seed=17721 HR_base=105.0 fitness=1.38 cadence_bias=-0.07 spo2_bias=+0.13
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=64s pre=33s sync=7s rec=82s total_event=122s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=4 activity=running duration=300s seed=53688 HR_base=159.1 fitness=0.64 cadence_bias=-0.08 spo2_bias=-0.06
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=79s pre=50s sync=10s rec=80s total_event=140s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=3 activity=walking duration=300s seed=68226 HR_base=103.9 fitness=1.35 cadence_bias=-0.12 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=75s pre=38s sync=20s rec=50s total_event=108s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=16 activity=running duration=300s seed=51992 HR_base=153.9 fitness=0.73 cadence_bias=+0.04 spo2_bias=-0.70
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=71s pre=50s sync=9s rec=72s total_event=131s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=19 activity=running duration=300s seed=62450 HR_base=156.5 fitness=0.77 cadence_bias=+0.02 spo2_bias=+1.30
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=65s pre=28s sync=8s rec=74s total_event=110s
+2026-03-11 15:57:30 | INFO     |   Event sessions: 20/30
+2026-03-11 15:57:30 | DEBUG    |   Session | user=1 activity=walking duration=300s seed=79403 HR_base=103.6 fitness=1.26 cadence_bias=-0.42 spo2_bias=-0.31
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=64s pre=40s sync=15s rec=81s total_event=136s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=15 activity=walking duration=300s seed=84568 HR_base=105.0 fitness=1.38 cadence_bias=-0.07 spo2_bias=+0.13
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=63s pre=27s sync=5s rec=49s total_event=81s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=18 activity=walking duration=300s seed=5923 HR_base=103.5 fitness=0.72 cadence_bias=+0.18 spo2_bias=-0.25
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=72s pre=46s sync=5s rec=72s total_event=123s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=17 activity=running duration=300s seed=72586 HR_base=143.3 fitness=0.95 cadence_bias=+0.21 spo2_bias=+0.15
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=60s pre=44s sync=5s rec=90s total_event=139s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=12 activity=walking duration=300s seed=9814 HR_base=87.4 fitness=1.13 cadence_bias=+0.46 spo2_bias=-0.13
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=73s pre=40s sync=12s rec=40s total_event=92s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=7 activity=running duration=300s seed=70345 HR_base=148.5 fitness=1.12 cadence_bias=-0.10 spo2_bias=+0.14
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=71s pre=32s sync=11s rec=63s total_event=106s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=11 activity=walking duration=300s seed=42942 HR_base=110.0 fitness=0.74 cadence_bias=-0.30 spo2_bias=-0.92
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=70s pre=43s sync=6s rec=41s total_event=90s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=8 activity=walking duration=300s seed=7350 HR_base=100.9 fitness=0.64 cadence_bias=-0.06 spo2_bias=+0.90
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=73s pre=28s sync=10s rec=82s total_event=120s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=9 activity=walking duration=300s seed=49532 HR_base=92.3 fitness=1.16 cadence_bias=+0.05 spo2_bias=+0.39
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=62s pre=32s sync=14s rec=71s total_event=117s
+2026-03-11 15:57:30 | DEBUG    |   Session | user=4 activity=running duration=300s seed=44654 HR_base=159.1 fitness=0.64 cadence_bias=-0.08 spo2_bias=-0.06
+2026-03-11 15:57:30 | DEBUG    |   Event planted | start=70s pre=42s sync=8s rec=86s total_event=136s
+2026-03-11 15:57:30 | INFO     |   Event sessions: 30/30
+2026-03-11 15:57:30 | INFO     | Label distribution:
+2026-03-11 15:57:30 | INFO     |   normal            882,800 samples  (84.1%)
+2026-03-11 15:57:30 | INFO     |   recovery           97,300 samples  (9.3%)
+2026-03-11 15:57:30 | INFO     |   pre_syncope        53,950 samples  (5.1%)
+2026-03-11 15:57:30 | INFO     |   syncope            15,950 samples  (1.5%)
+2026-03-11 15:57:30 | INFO     | ------------------------------------------------------------
+2026-03-11 15:57:30 | INFO     | Dataset summary:
+2026-03-11 15:57:30 | INFO     |   Total samples   : 1,050,000
+2026-03-11 15:57:30 | INFO     |   Total sessions  : 70
+2026-03-11 15:57:30 | INFO     |   Unique users    : 20
+2026-03-11 15:57:31 | INFO     |   Activities      : ['sleeping', 'walking', 'running']
+2026-03-11 15:57:31 | INFO     |   Faint events    : 30
+2026-03-11 15:57:31 | INFO     |   sleeping   samples:   240,000
+2026-03-11 15:57:31 | INFO     |   walking    samples:   420,000
+2026-03-11 15:57:31 | INFO     |   running    samples:   390,000
+2026-03-11 15:57:31 | INFO     | ------------------------------------------------------------
+2026-03-11 15:57:31 | INFO     | Creating sliding windows (size=128, stride=32) …
+2026-03-11 15:57:31 | INFO     | Windows created: X=(32550, 128, 9)  y=(32550,)
+2026-03-11 15:57:31 | INFO     |   Window label [0] normal           27,328 windows
+2026-03-11 15:57:31 | INFO     |   Window label [1] pre_syncope       1,688 windows
+2026-03-11 15:57:31 | INFO     |   Window label [2] syncope             499 windows
+2026-03-11 15:57:31 | INFO     |   Window label [3] recovery          3,035 windows
+2026-03-11 15:57:31 | INFO     | ------------------------------------------------------------
+2026-03-11 15:57:31 | INFO     | Saving outputs …

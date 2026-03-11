@@ -4,6 +4,7 @@ import numpy as np
 from config import FS
 from events import plant_faint_event
 from sessions import simulate_session
+from user_profile import clear_profile_cache
 
 
 def build_dataset(
@@ -25,6 +26,10 @@ def build_dataset(
     """
     if event_activities  is None: event_activities  = ["walking", "running"]
     if normal_activities is None: normal_activities = ["walking", "running", "sleeping"]
+
+    # Reset the per-user profile cache so every build starts from a clean state.
+    # This ensures reproducibility when build_dataset() is called more than once.
+    clear_profile_cache()
 
     all_dfs   = []
     event_log = []
