@@ -33,14 +33,38 @@ def _thermal_lag(sig, tau_s: float, fs: int = FS) -> np.ndarray:
     return out
 
 
-def add_artifacts(sig, dropout=0.003, spikes=0.002, rng=None):
-    """Generic dropout + spike artifacts (sensor hardware faults)."""
+def add_artifacts(
+    sig,
+    dropout=0.003,
+    spikes=0.002,
+    burst_rate=0.00015,
+    burst_len_s=(0.4, 2.5),
+    fs=FS,
+    rng=None,
+):
+    """Generic wearable artifacts: random dropouts, burst dropouts, and spikes."""
     if rng is None:
         rng = np.random.default_rng()
+
     s = sig.copy()
+
+    # Independent sample dropouts (single-point packet loss)
     s[rng.random(len(s)) < dropout] = np.nan
+
+    # Burst dropouts (e.g. loose strap / poor skin contact)
+    n_bursts = int(rng.poisson(len(s) * burst_rate))
+    if n_bursts > 0:
+        lo, hi = burst_len_s
+        lo_n, hi_n = max(1, int(lo * fs)), max(2, int(hi * fs))
+        for _ in range(n_bursts):
+            start = int(rng.integers(0, len(s)))
+            span = int(rng.integers(lo_n, hi_n))
+            s[start:min(start + span, len(s))] = np.nan
+
+    # Transient spikes from motion or analog front-end saturation
     mask = rng.random(len(s)) < spikes
     s[mask] += rng.normal(0, float(np.nanstd(sig)) * 5, int(mask.sum()))
+
     return s
 
 
