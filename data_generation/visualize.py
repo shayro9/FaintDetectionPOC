@@ -201,22 +201,22 @@ def main():
     print("\n[1/5] Plotting session signals...")
     plot_session(df, session_id)
 
-    print("[2/5] Plotting label distribution...")
-    plot_label_distribution(df)
-
-    print("Columns right before plot_sensor_by_label:", list(df.columns))
-    print("Has label?", "label" in df.columns)
-    print("[3/5] Plotting sensor by label...")
-    plot_sensor_by_label(df, sensor=args.sensor)
-
-    print("[4/5] Plotting correlation heatmap...")
-    plot_correlation(df)
-
-    if args.npz:
-        print("[5/5] Plotting window distribution...")
-        plot_window_distribution(args.npz)
-    else:
-        print("[5/5] Skipping window distribution (no --npz provided)")
+    # print("[2/5] Plotting label distribution...")
+    # plot_label_distribution(df)
+    #
+    # print("Columns right before plot_sensor_by_label:", list(df.columns))
+    # print("Has label?", "label" in df.columns)
+    # print("[3/5] Plotting sensor by label...")
+    # plot_sensor_by_label(df, sensor=args.sensor)
+    #
+    # print("[4/5] Plotting correlation heatmap...")
+    # plot_correlation(df)
+    #
+    # if args.npz:
+    #     print("[5/5] Plotting window distribution...")
+    #     plot_window_distribution(args.npz)
+    # else:
+    #     print("[5/5] Skipping window distribution (no --npz provided)")
 
     print("\nDone. All plots opened in browser.")
 
