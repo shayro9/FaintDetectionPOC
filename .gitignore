@@ -4,3 +4,7 @@
 /data/smartwatch_windows.npz
 /simulation.log
 .idea/workspace.xml
+*.pyc
+data_generation/__pycache__/sessions.cpython-312.pyc
+data_generation/__pycache__/signals.cpython-312.pyc
+*.xml
