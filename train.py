@@ -8,7 +8,7 @@ import torch
 import wandb
 import yaml
 
-from loc_prediction.training.loo_trainer import LOOTrainer
+from training.loo_trainer import LOOTrainer
 
 # Implemented in the data branch — loads per-patient windowed arrays
 from data_generation.loader import load_patients

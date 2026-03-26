@@ -27,14 +27,14 @@ models:
     num_layers: 1
     dropout: 0.2
     lr: 0.001
-    max_epochs: 50
+    max_epochs: 20 # small number to not overfit too much on the data
 
 evaluation:
   threshold: 0.5
-  time_to_event_bins:
-    - 600   # >10min
-    - 300   # 5-10min
-    - 120   # 2-5min
-    - 0     # <2min
+  time_to_event_bins: #testing how long before the event the model actually identified it
+    - 60
+    - 20
+    - 10
+    - 0
   input_length: 100
   pred_horizon: 20
