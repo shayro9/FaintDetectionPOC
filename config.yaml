@@ -1,0 +1,40 @@
+experiment:
+  wandb_project: "loc_prediction"
+  seed: 42
+
+data:
+  path: "data/"
+
+models:
+  svm:
+    enabled: true
+    input: "features"
+    C: 1.0
+    gamma: "scale"
+    kernel: "rbf"
+
+  rf:
+    enabled: true
+    input: "features"
+    n_estimators: 100
+    max_depth: 4
+    min_samples_leaf: 2
+
+  rnn:
+    enabled: true
+    input: "raw"
+    hidden_size: 32
+    num_layers: 1
+    dropout: 0.2
+    lr: 0.001
+    max_epochs: 50
+
+evaluation:
+  threshold: 0.5
+  time_to_event_bins:
+    - 600   # >10min
+    - 300   # 5-10min
+    - 120   # 2-5min
+    - 0     # <2min
+  input_length: 100
+  pred_horizon: 20
