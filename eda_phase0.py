@@ -32,22 +32,25 @@ warnings.filterwarnings('ignore')
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────────────────────
 
-DATA_DIR = Path("data")
-EDA_OUTPUT_DIR = DATA_DIR / "eda"
+DATA_DIR = Path("data") / "human_data" / "Data"
+EDA_OUTPUT_DIR = Path("data") / "eda"
 
-# Signals to profile (18 total)
+# Signals to profile (18 total, organized by type)
 SIGNALS = [
-    # EDA
+    # EDA (5 signals)
     ("eda_tonic", "EDA"),
     ("muPR", "EDA"), ("sigmaPR", "EDA"),
     ("mu_amp", "EDA"), ("sigma_amp", "EDA"),
-    # HRV
+    # HRV (10 signals)
     ("muRR", "HRV"), ("sigmaRR", "HRV"),
     ("muHR", "HRV"), ("sigmaHR", "HRV"),
     ("LF", "HRV"), ("HF", "HRV"),
     ("LFnu", "HRV"), ("HFnu", "HRV"),
     ("pow_tot", "HRV"), ("ratio", "HRV"),
 ]
+
+# Propofol study has 9 subjects
+SUBJECTS = list(range(1, 10))
 
 # ─────────────────────────────────────────────────────────────────────────────
 # UTILITIES
@@ -61,25 +64,29 @@ def create_output_dir():
 
 def find_subjects():
     """Find all subject directories (S1, S2, ..., S9)."""
+    # Propofol study has 9 subjects (S1-S9)
     subjects = []
-    for i in range(1, 10):
-        pattern = f"S{i}_*.csv"
+    for i in SUBJECTS:
+        # Check if any signal file exists for this subject
+        pattern = f"S{i}_muHR.csv"
         files = list(DATA_DIR.glob(pattern))
         if files:
             subjects.append(i)
-    return sorted(subjects)
+    return sorted(subjects) if subjects else SUBJECTS
 
 
 def load_signal(subject_id, signal_name):
-    """Load signal CSV for a subject."""
+    """Load signal CSV for a subject (handles comma-separated row format)."""
     pattern = f"S{subject_id}_{signal_name}.csv"
     files = list(DATA_DIR.glob(pattern))
     if not files:
         return None
     try:
         df = pd.read_csv(files[0], header=None)
-        df.columns = ["value"]
-        return df
+        # Handle both: single row with multiple values OR column format
+        values = df.values.flatten()
+        result_df = pd.DataFrame({"value": values})
+        return result_df
     except Exception as e:
         print(f"  ⚠️  Error loading {pattern}: {e}")
         return None
@@ -109,50 +116,77 @@ def load_timestamps(subject_id, signal_name):
 
 def load_loc_roc(subject_id):
     """Load LOC (Loss of Consciousness) and ROC (Recovery) timestamps."""
-    loc_files = list(DATA_DIR.glob(f"S{subject_id}_LOC.csv"))
-    roc_files = list(DATA_DIR.glob(f"S{subject_id}_ROC.csv"))
+    # The data has a master LOC_ROC.csv file with all subjects
+    loc_roc_file = DATA_DIR / "LOC_ROC.csv"
     
-    loc_time = None
-    roc_time = None
+    if not loc_roc_file.exists():
+        return None, None
     
-    if loc_files:
-        try:
-            loc_data = pd.read_csv(loc_files[0], header=None)
-            loc_time = loc_data.iloc[0, 0] if len(loc_data) > 0 else None
-        except:
-            pass
+    try:
+        loc_roc_data = pd.read_csv(loc_roc_file, header=None)
+        # Subject IDs are 1-indexed; LOC_ROC rows correspond to S1, S2, ..., S9
+        if subject_id - 1 < len(loc_roc_data):
+            row = loc_roc_data.iloc[subject_id - 1]
+            loc_time = row[0] if pd.notna(row[0]) else None
+            roc_time = row[1] if pd.notna(row[1]) else None
+            return loc_time, roc_time
+    except Exception as e:
+        print(f"  ⚠️  Error loading LOC/ROC for subject {subject_id}: {e}")
     
-    if roc_files:
-        try:
-            roc_data = pd.read_csv(roc_files[0], header=None)
-            roc_time = roc_data.iloc[0, 0] if len(roc_data) > 0 else None
-        except:
-            pass
-    
-    return loc_time, roc_time
+    return None, None
 
 
 def profile_signal(subject_id, signal_name):
-    """Profile a single signal."""
-    signal_data = load_signal(subject_id, signal_name)
-    
-    if signal_data is None or len(signal_data) == 0:
+    """Profile a single signal - fast streaming approach for large files."""
+    pattern = f"S{subject_id}_{signal_name}.csv"
+    files = list(DATA_DIR.glob(pattern))
+    if not files:
         return None
     
-    values = signal_data["value"].values
-    
-    return {
-        "subject": subject_id,
-        "signal": signal_name,
-        "count": len(values),
-        "mean": np.mean(values),
-        "std": np.std(values),
-        "min": np.min(values),
-        "max": np.max(values),
-        "median": np.median(values),
-        "null_count": np.isnan(values).sum(),
-        "null_rate": np.isnan(values).sum() / len(values) if len(values) > 0 else 0,
-    }
+    try:
+        file_path = files[0]
+        file_size_mb = file_path.stat().st_size / (1024 * 1024)
+        
+        # Fast approach: parse raw values without pandas overhead for single-row files
+        with open(file_path, 'r') as f:
+            line = f.readline().strip()
+        
+        # Parse comma-separated values efficiently
+        values_str = line.split(',')
+        
+        # Convert to numeric, skip NaN
+        values_clean = []
+        total_count = len(values_str)
+        nan_count = 0
+        
+        for v in values_str:
+            if v == 'NaN':
+                nan_count += 1
+            else:
+                try:
+                    values_clean.append(float(v))
+                except ValueError:
+                    nan_count += 1
+        
+        values_arr = np.array(values_clean)
+        
+        return {
+            "subject": subject_id,
+            "signal": signal_name,
+            "count": total_count,
+            "non_null_count": len(values_clean),
+            "mean": float(np.mean(values_arr)) if len(values_arr) > 0 else np.nan,
+            "std": float(np.std(values_arr)) if len(values_arr) > 0 else np.nan,
+            "min": float(np.min(values_arr)) if len(values_arr) > 0 else np.nan,
+            "max": float(np.max(values_arr)) if len(values_arr) > 0 else np.nan,
+            "median": float(np.median(values_arr)) if len(values_arr) > 0 else np.nan,
+            "null_count": nan_count,
+            "null_rate": nan_count / total_count if total_count > 0 else 0,
+            "file_size_mb": file_size_mb,
+        }
+    except Exception as e:
+        print(f"  ⚠️  Error profiling {pattern}: {e}")
+        return None
 
 
 # ─────────────────────────────────────────────────────────────────────────────

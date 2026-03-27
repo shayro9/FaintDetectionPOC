@@ -2,6 +2,10 @@
 /data/example_data.png
 /data/smartwatch_dataset.csv
 /data/smartwatch_windows.npz
+/data/eda
+/data/bronze
+/data/silver
+/data/human_data
 /simulation.log
 .idea/workspace.xml
 *.pyc
