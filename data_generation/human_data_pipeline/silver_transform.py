@@ -28,7 +28,7 @@ warnings.filterwarnings('ignore', category=RuntimeWarning)
 # CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
 
-DATA_DIR = Path("data")
+DATA_DIR = Path("../../data")
 BRONZE_DIR = DATA_DIR / "bronze"
 SILVER_DIR = DATA_DIR / "silver"
 SILVER_DIR.mkdir(exist_ok=True)

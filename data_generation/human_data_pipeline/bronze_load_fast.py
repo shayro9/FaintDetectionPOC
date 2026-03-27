@@ -25,8 +25,8 @@ import json
 import pandas as pd
 import numpy as np
 
-DATA_DIR = Path("data") / "human_data" / "Data"
-BRONZE_DIR = Path("data") / "bronze"
+DATA_DIR = Path("../../data") / "human_data" / "Data"
+BRONZE_DIR = Path("../../data") / "bronze"
 
 SIGNAL_FILES = [
     "eda_tonic",

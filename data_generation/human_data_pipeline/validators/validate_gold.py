@@ -23,7 +23,7 @@ import json
 # CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
 
-DATA_DIR = Path("data")
+DATA_DIR = Path("../../../data")
 GOLD_DIR = DATA_DIR / "gold"
 
 EXPECTED_NUM_FOLDS = 9

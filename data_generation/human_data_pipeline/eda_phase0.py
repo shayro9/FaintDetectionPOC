@@ -32,8 +32,8 @@ warnings.filterwarnings('ignore')
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────────────────────
 
-DATA_DIR = Path("data") / "human_data" / "Data"
-EDA_OUTPUT_DIR = Path("data") / "eda"
+DATA_DIR = Path("../../data") / "human_data" / "Data"
+EDA_OUTPUT_DIR = Path("../../data") / "eda"
 
 # Signals to profile (18 total, organized by type)
 SIGNALS = [

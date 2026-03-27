@@ -148,16 +148,17 @@ data/gold/
 ### Loading Data
 
 **Python (Pandas)**:
+
 ```python
 import pandas as pd
 
 # Load fold 0 (leave out Subject 1 for testing)
-train_df = pd.read_parquet('data/gold/fold_00/train.parquet')
-val_df = pd.read_parquet('data/gold/fold_00/val.parquet')
-test_df = pd.read_parquet('data/gold/fold_00/test.parquet')
+train_df = pd.read_parquet('../../data/gold/fold_00/train.parquet')
+val_df = pd.read_parquet('../../data/gold/fold_00/val.parquet')
+test_df = pd.read_parquet('../../data/gold/fold_00/test.parquet')
 
 # Metadata columns
-metadata_cols = ['subject_id', 'window_start_sec', 'window_end_sec', 
+metadata_cols = ['subject_id', 'window_start_sec', 'window_end_sec',
                  'consciousness_state', 'has_loc_in_window', 'high_risk', 'target_class']
 
 # Feature columns (excluding metadata)

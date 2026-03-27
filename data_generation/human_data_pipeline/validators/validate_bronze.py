@@ -20,8 +20,8 @@ import json
 import pandas as pd
 import numpy as np
 
-BRONZE_DIR = Path("data") / "bronze"
-DATA_DIR = Path("data") / "human_data" / "Data"
+BRONZE_DIR = Path("../../../data") / "bronze"
+DATA_DIR = Path("../../../data") / "human_data" / "Data"
 
 EXPECTED_SIGNALS = [
     "eda_tonic",

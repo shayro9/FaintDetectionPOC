@@ -17,7 +17,7 @@ from datetime import datetime
 # CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
 
-DATA_DIR = Path("data")
+DATA_DIR = Path("../../../data")
 GOLD_DIR = DATA_DIR / "gold"
 
 DELIVERY_CHECKLIST = {

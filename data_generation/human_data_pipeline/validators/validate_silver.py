@@ -24,7 +24,7 @@ import json
 # CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
 
-DATA_DIR = Path("data")
+DATA_DIR = Path("../../../data")
 SILVER_DIR = DATA_DIR / "silver"
 
 EXPECTED_SUBJECTS = list(range(1, 10))
