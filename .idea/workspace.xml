@@ -5,9 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03447da4-1035-42cc-a1ba-efd31399baeb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/FaintDetectionPOC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FaintDetectionPOC.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_00/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_00/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_00/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_00/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_00/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_00/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_01/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_01/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_01/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_01/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_01/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_01/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_02/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_02/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_02/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_02/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_02/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_02/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_03/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_03/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_03/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_03/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_03/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_03/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_04/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_04/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_04/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_04/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_04/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_04/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_05/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_05/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_05/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_05/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_05/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_05/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_06/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_06/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_06/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_06/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_06/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_06/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_07/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_07/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_07/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_07/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_07/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_07/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_08/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_08/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_08/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_08/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_08/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_08/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/gold_features.log" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/gold_features.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generation/human_data_pipeline/gold_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/human_data_pipeline/gold_features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generation/human_data_pipeline/silver_transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/human_data_pipeline/silver_transform.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generation/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/rnn_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/rnn_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/training/loo_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/loo_trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,23 +68,23 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="(feat)data-preparation-phase-0" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "tal2tal2"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tal2tal2&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/shayro9/FaintDetectionPOC.git",
-    "accountId": "47d2c464-d1a9-4361-83ae-d1abaa14f29d"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/shayro9/FaintDetectionPOC.git&quot;,
+    &quot;accountId&quot;: &quot;47d2c464-d1a9-4361-83ae-d1abaa14f29d&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -68,8 +102,10 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.data_generation.executor": "Run",
     "Python.eda_phase0.executor": "Run",
+    "Python.gold_features.executor": "Run",
     "Python.main.executor": "Run",
     "Python.raw_data.executor": "Run",
+    "Python.silver_transform.executor": "Run",
     "Python.train.executor": "Run",
     "Python.validate_bronze.executor": "Run",
     "Python.visualize.executor": "Run",
@@ -105,7 +141,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eda_phase0.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -129,7 +164,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="C:\Users\shayr\PycharmProjects\FaintDetectionPOC\data_generation\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -153,7 +187,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/raw_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -177,7 +210,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/validate_bronze.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -201,7 +233,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_generation/visualize.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />

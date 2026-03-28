@@ -21,7 +21,7 @@ _METADATA_COLS = [
 class Patient:
     id: str
     X_features: np.ndarray  # (N, F) feature matrix
-    X_raw: np.ndarray       # (N, 1, F) placeholder — gold data has no raw signals
+    X_raw: np.ndarray       # (N, T, C) bronze signal windows; (N, 1, F) placeholder pre-pipeline
     y: np.ndarray           # (N,) binary labels
     time_to_loc: np.ndarray # (N,) seconds before LOC (positive = before, negative = after)
 
@@ -65,9 +65,13 @@ def load_patients(data_path: str) -> list[Patient]:
         y = df["high_risk"].values.astype(np.int32)
         time_to_loc = _compute_time_to_loc(df)
 
-        # X_raw is a placeholder: gold data contains engineered features, not raw signals.
-        # Shape (N, 1, F) is kept consistent with the (N, T, C) convention used by RNNModel.
-        X_raw = X_features[:, np.newaxis, :]
+        # Load raw (N, T, C) signal array produced by gold_features.py.
+        # Falls back to a feature-based placeholder if the pipeline hasn't been re-run yet.
+        raw_path = fold_dir / "test_raw.npy"
+        if raw_path.exists():
+            X_raw = np.load(raw_path)  # (N, T, C=15)
+        else:
+            X_raw = X_features[:, np.newaxis, :]  # placeholder (N, 1, F)
 
         patients.append(Patient(
             id=subject_id,

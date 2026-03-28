@@ -37,6 +37,16 @@ WINDOW_LENGTH_SEC = 30
 SAMPLE_RATE_HZ = 10
 SAMPLES_PER_WINDOW = WINDOW_LENGTH_SEC * SAMPLE_RATE_HZ  # 300
 
+# Canonical signal order used to build the (N, T, C) RNN input tensor.
+# C = len(SIGNAL_NAMES) = 15; must match the signals written by the bronze layer.
+SIGNAL_NAMES = [
+    "eda_tonic",
+    "muPR", "sigmaPR", "mu_amp", "sigma_amp",
+    "muRR", "sigmaRR", "muHR", "sigmaHR",
+    "LF", "HF", "LFnu", "HFnu",
+    "pow_tot", "ratio",
+]
+
 # Target classes (for imbalance handling later)
 TARGET_CLASSES = ['BASELINE', 'PRE_LOC', 'LOC', 'POST_ROC']
 
@@ -89,6 +99,28 @@ def compute_time_domain_features(signal_array):
     
     return features
 
+def build_raw_array(df_split, signal_names, T):
+    """Stack per-window signal arrays into a (N, T, C) float32 array for the RNN.
+
+    Windows shorter than T are left-padded with NaN (filled to 0 downstream).
+    Windows longer than T are truncated to the first T samples.
+    Missing signal columns produce an all-zero channel rather than an error.
+    """
+    N = len(df_split)
+    C = len(signal_names)
+    X = np.zeros((N, T, C), dtype=np.float32)
+    for c, name in enumerate(signal_names):
+        col = f"{name}_values"
+        if col not in df_split.columns:
+            continue
+        for i, arr in enumerate(df_split[col].values):
+            a = np.asarray(arr, dtype=np.float32)
+            a = np.nan_to_num(a, nan=0.0, posinf=0.0, neginf=0.0)
+            length = min(len(a), T)
+            X[i, :length, c] = a[:length]
+    return X
+
+
 def compute_hrv_ratio_features(df_row):
     """Compute HRV ratio features (LF/HF, etc.)."""
     features = {}
@@ -112,7 +144,7 @@ def compute_hrv_ratio_features(df_row):
 # ─────────────────────────────────────────────────────────────────────────────
 
 logger.log("Loading Silver layer windowed data...")
-df_silver = pd.read_parquet(SILVER_DIR / "signals_windowed.parquet")
+df_silver = pd.read_pickle(SILVER_DIR / "signals_windowed.pkl")
 logger.log(f"Loaded {len(df_silver)} samples with {len(df_silver.columns)} columns\n")
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -184,6 +216,14 @@ if hrv_features_list:
     df_features = df_features.join(df_hrv, how='left')
 
 logger.log(f"  OK - Added derived features\n")
+
+# Attach raw signal value columns from df_silver so they travel through the
+# LOSO splits and can be extracted into per-fold .npy files at save time.
+# This join is index-safe here: df_features still carries df_silver's original
+# RangeIndex (reset happens in Step 4).
+_values_cols = [col for col in df_silver.columns if col.endswith('_values')]
+df_features = df_features.join(df_silver[_values_cols], how='left')
+logger.log(f"  Joined {len(_values_cols)} raw signal columns for RNN export\n")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 4: HANDLE MISSING VALUES
@@ -296,17 +336,26 @@ for fold_idx, fold_data in loso_folds.items():
     # Save train/val/test splits for this fold
     fold_dir = GOLD_DIR / f"fold_{fold_idx:02d}"
     fold_dir.mkdir(exist_ok=True)
-    
-    # Identify feature columns (exclude metadata)
-    metadata_cols = ['subject_id', 'window_start_sec', 'window_end_sec', 
+
+    # Columns to exclude from the tabular feature parquet
+    values_cols_in_fold = [col for col in fold_data['train'].columns if col.endswith('_values')]
+    metadata_cols = ['subject_id', 'window_start_sec', 'window_end_sec',
                      'consciousness_state', 'has_loc_in_window', 'high_risk', 'target_class']
-    feature_cols = [col for col in fold_data['train'].columns if col not in metadata_cols]
-    
-    # Save train/val/test with both features and metadata
-    fold_data['train'].to_parquet(fold_dir / "train.parquet", index=False, compression='snappy')
-    fold_data['val'].to_parquet(fold_dir / "val.parquet", index=False, compression='snappy')
-    fold_data['test'].to_parquet(fold_dir / "test.parquet", index=False, compression='snappy')
-    
+    exclude_cols = set(metadata_cols + values_cols_in_fold)
+    feature_cols = [col for col in fold_data['train'].columns if col not in exclude_cols]
+
+    for split_name in ('train', 'val', 'test'):
+        split_df = fold_data[split_name]
+
+        # (N, T, C) raw array for the RNN
+        X_raw = build_raw_array(split_df, SIGNAL_NAMES, SAMPLES_PER_WINDOW)
+        np.save(fold_dir / f"{split_name}_raw.npy", X_raw)
+
+        # Feature parquet — no raw signal arrays, no metadata leakage
+        split_df.drop(columns=values_cols_in_fold, errors='ignore').to_parquet(
+            fold_dir / f"{split_name}.parquet", index=False, compression='snappy'
+        )
+
     fold_metadata[fold_idx] = {
         'test_subject': int(fold_data['test_subject']),
         'train_size': fold_data['train_size'],
@@ -314,9 +363,11 @@ for fold_idx, fold_data in loso_folds.items():
         'test_size': fold_data['test_size'],
         'num_features': len(feature_cols),
         'feature_names': feature_cols,
+        'rnn_channels': len(SIGNAL_NAMES),
+        'rnn_timesteps': SAMPLES_PER_WINDOW,
     }
-    
-    logger.log(f"  OK - Fold {fold_idx}: Train/val/test saved to fold_{fold_idx:02d}/")
+
+    logger.log(f"  OK - Fold {fold_idx}: parquet + raw .npy saved to fold_{fold_idx:02d}/")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 8: SAVE GLOBAL METADATA

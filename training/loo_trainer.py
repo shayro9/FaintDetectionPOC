@@ -82,7 +82,7 @@ class LOOTrainer:
         n = len(patients)
         threshold = self.cfg["evaluation"]["threshold"]
         bins = self.cfg["evaluation"]["time_to_event_bins"]
-        n_pca = self.cfg.get("preprocessing", {}).get("pca_components", 0)
+        n_pca = model_cfg.get("pca_components", 0)
         X_attr = "X_features" if model_cfg["input"] == "features" else "X_raw"
 
         fold_results: list[dict] = []

@@ -43,6 +43,13 @@ class GRULightning(L.LightningModule):
         self.log("train_loss", loss, on_epoch=True, on_step=False)
         return loss
 
+    def validation_step(self, batch: tuple, batch_idx: int) -> None:
+        """Compute validation loss and log to wandb."""
+        x, y = batch
+        logits = self(x)
+        loss = self.loss_fn(logits, y.float())
+        self.log("val_loss", loss, on_epoch=True, on_step=False, prog_bar=True)
+
     def configure_optimizers(self):
         """Return Adam optimizer."""
         return torch.optim.Adam(self.parameters(), lr=self.lr)
@@ -58,10 +65,14 @@ class RNNModel(BaseModel):
         self.module: GRULightning | None = None
 
     def fit(self, X_train: np.ndarray, y_train: np.ndarray) -> None:
-        """Train the GRU with PyTorch Lightning, logging to wandb."""
+        """Train the GRU with PyTorch Lightning, logging train and val loss to wandb."""
+        n_val = max(1, int(len(X_train) * 0.2))
         X_t = torch.tensor(X_train, dtype=torch.float32)
         y_t = torch.tensor(y_train, dtype=torch.float32)
-        loader = DataLoader(TensorDataset(X_t, y_t), batch_size=32, shuffle=True)
+        dataset = TensorDataset(X_t, y_t)
+        val_set, train_set = torch.utils.data.random_split(dataset, [n_val, len(dataset) - n_val])
+        train_loader = DataLoader(train_set, batch_size=32, shuffle=True)
+        val_loader = DataLoader(val_set, batch_size=32)
 
         self.module = GRULightning(self.cfg, self.pos_weight)
         trainer = L.Trainer(
@@ -70,7 +81,7 @@ class RNNModel(BaseModel):
             enable_progress_bar=False,
             enable_model_summary=False,
         )
-        trainer.fit(self.module, loader)
+        trainer.fit(self.module, train_loader, val_loader)
 
     def predict_proba(self, X: np.ndarray) -> np.ndarray:
         """Return (N, 2) probability array [1-p, p]."""

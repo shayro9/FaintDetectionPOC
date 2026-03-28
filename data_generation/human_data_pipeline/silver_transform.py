@@ -34,7 +34,8 @@ SILVER_DIR = DATA_DIR / "silver"
 SILVER_DIR.mkdir(exist_ok=True)
 
 WINDOW_LENGTH_SEC = 30  # 30-second windows for prediction
-SAMPLE_RATE_HZ = 10  # Assume 10 Hz sampling (adaptive per signal later)
+SAMPLE_RATE_HZ = 10  # Assumed base rate for time-axis construction
+MAX_SAMPLE_RATE_HZ = 20  # Hard cap — all signals are derived physio metrics (≤10 Hz in practice)
 
 # Consciousness states relative to LOC/ROC
 WINDOW_STATES = {
@@ -108,12 +109,15 @@ for idx, signal_row in signals_bronze.iterrows():
     loc_sec = loc_roc.get('loc_sec', 0)
     roc_sec = loc_roc.get('roc_sec', 500)
     
-    # Create time axis (assume uniform sampling across full experiment window)
-    # For now, estimate 10 Hz or derive from value count
-    estimated_duration_sec = (roc_sec - loc_sec) * 1.5 + 60  # Add padding
-    estimated_sample_rate = value_count / estimated_duration_sec if estimated_duration_sec > 0 else 10
-    
-    time_axis = np.arange(value_count) / max(estimated_sample_rate, 1)
+    # Create time axis. Estimate sample rate from value count / expected duration,
+    # then cap at MAX_SAMPLE_RATE_HZ — all signals here are derived physio metrics
+    # (mean/sigma of PR, RR, HR, HRV power) so rates above ~10 Hz are artefacts
+    # of the value-count / duration estimate being off.
+    estimated_duration_sec = (roc_sec - loc_sec) * 1.5 + 60
+    raw_rate = value_count / estimated_duration_sec if estimated_duration_sec > 0 else SAMPLE_RATE_HZ
+    estimated_sample_rate = min(max(raw_rate, 1), MAX_SAMPLE_RATE_HZ)
+
+    time_axis = np.arange(value_count) / estimated_sample_rate
     
     # Store denormalized record
     denormalized_records.append({
@@ -259,14 +263,8 @@ for subject_id, signal_dict in by_subject.items():
             mask = (time_axis >= window_start_sec) & (time_axis < window_end_sec)
             window_values = normalized_values[mask]
             
-            # Pad or truncate to fixed length
-            target_length = int(WINDOW_LENGTH_SEC * SAMPLE_RATE_HZ)
-            if len(window_values) < target_length:
-                window_values = np.pad(window_values, (0, target_length - len(window_values)), 
-                                      mode='constant', constant_values=np.nan)
-            elif len(window_values) > target_length:
-                window_values = window_values[:target_length]
-            
+            # Store however many samples fall in this window — no forced padding.
+            # Gold layer handles fixed-length shaping for each model type.
             window_features[f'{signal_name}_values'] = window_values
         
         windowed_samples.append(window_features)
@@ -284,8 +282,11 @@ logger.log("Step 5: Saving windowed samples to Parquet...")
 
 if len(windowed_samples) > 0:
     df_windowed = pd.DataFrame(windowed_samples)
-    output_file = SILVER_DIR / "signals_windowed.parquet"
-    df_windowed.to_parquet(output_file, index=False, compression='snappy')
+
+    # Pickle preserves variable-length numpy arrays in-place with no extra
+    # memory copies — parquet/pyarrow cannot handle ragged object columns well.
+    output_file = SILVER_DIR / "signals_windowed.pkl"
+    df_windowed.to_pickle(output_file)
     logger.log(f"  OK Saved {len(df_windowed)} samples to {output_file}\n")
 else:
     logger.log("  WARN No windowed samples created!\n")
