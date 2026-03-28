@@ -19,7 +19,7 @@ class GRULightning(L.LightningModule):
         self.save_hyperparameters()
         self.lr = cfg["lr"]
         self.gru = nn.GRU(
-            input_size=4,
+            input_size=cfg["input_size"],
             hidden_size=cfg["hidden_size"],
             num_layers=cfg["num_layers"],
             dropout=cfg["dropout"] if cfg["num_layers"] > 1 else 0.0,

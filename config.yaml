@@ -29,6 +29,9 @@ models:
     lr: 0.001
     max_epochs: 20 # small number to not overfit too much on the data
 
+preprocessing:
+  pca_components: 30  # 0 to disable; applied after normalization, before model fit
+
 evaluation:
   threshold: 0.5
   time_to_event_bins: #testing how long before the event the model actually identified it
