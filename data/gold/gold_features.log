@@ -1,0 +1,116 @@
+[2026-03-27 20:10:23] INFO       Loading Silver layer windowed data...
+[2026-03-27 20:10:23] INFO       Loaded 143 samples with 20 columns
+
+[2026-03-27 20:10:23] INFO       Step 1: Flattening signal arrays and extracting time-domain features...
+[2026-03-27 20:10:23] INFO         Found 15 signal columns
+[2026-03-27 20:10:25] INFO         OK - Created 150 time-domain features
+
+[2026-03-27 20:10:25] INFO       Step 2: Computing derived features...
+[2026-03-27 20:10:25] INFO         OK - Added derived features
+
+[2026-03-27 20:10:25] INFO       Step 3: Handling missing values...
+[2026-03-27 20:10:25] INFO         NaN values before imputation: 2873
+[2026-03-27 20:10:26] INFO         NaN values after imputation: 0
+[2026-03-27 20:10:26] INFO         OK - Handled missing values
+
+[2026-03-27 20:10:26] INFO       Step 4: Encoding target variable...
+[2026-03-27 20:10:26] INFO         Target class distribution:
+[2026-03-27 20:10:26] INFO           - LOC: 96 (67.1%)
+[2026-03-27 20:10:26] INFO           - POST_ROC: 27 (18.9%)
+[2026-03-27 20:10:26] INFO           - PRE_LOC: 18 (12.6%)
+[2026-03-27 20:10:26] INFO           - BASELINE: 2 (1.4%)
+[2026-03-27 20:10:26] INFO         High-risk (PRE_LOC + LOC): 114 (79.7%)
+
+[2026-03-27 20:10:26] INFO       Step 5: Creating LOSO (Leave-One-Subject-Out) folds...
+[2026-03-27 20:10:26] INFO         9 subjects -> 9 LOSO folds
+
+[2026-03-27 20:10:26] INFO         Fold 0: Test=S1 | Train=98 | Val=25 | Test=20
+[2026-03-27 20:10:26] INFO         Fold 1: Test=S2 | Train=101 | Val=26 | Test=16
+[2026-03-27 20:10:26] INFO         Fold 2: Test=S3 | Train=101 | Val=26 | Test=16
+[2026-03-27 20:10:26] INFO         Fold 3: Test=S4 | Train=103 | Val=26 | Test=14
+[2026-03-27 20:10:26] INFO         Fold 4: Test=S5 | Train=103 | Val=26 | Test=14
+[2026-03-27 20:10:26] INFO         Fold 5: Test=S6 | Train=103 | Val=26 | Test=14
+[2026-03-27 20:10:26] INFO         Fold 6: Test=S7 | Train=102 | Val=26 | Test=15
+[2026-03-27 20:10:26] INFO         Fold 7: Test=S8 | Train=100 | Val=26 | Test=17
+[2026-03-27 20:10:26] INFO         Fold 8: Test=S9 | Train=100 | Val=26 | Test=17
+[2026-03-27 20:10:26] INFO       
+Step 6: Saving LOSO folds...
+
+[2026-03-27 20:10:26] INFO         OK - Fold 0: Train/val/test saved to fold_00/
+[2026-03-27 20:10:26] INFO         OK - Fold 1: Train/val/test saved to fold_01/
+[2026-03-27 20:10:26] INFO         OK - Fold 2: Train/val/test saved to fold_02/
+[2026-03-27 20:10:26] INFO         OK - Fold 3: Train/val/test saved to fold_03/
+[2026-03-27 20:10:26] INFO         OK - Fold 4: Train/val/test saved to fold_04/
+[2026-03-27 20:10:26] INFO         OK - Fold 5: Train/val/test saved to fold_05/
+[2026-03-27 20:10:26] INFO         OK - Fold 6: Train/val/test saved to fold_06/
+[2026-03-27 20:10:26] INFO         OK - Fold 7: Train/val/test saved to fold_07/
+[2026-03-27 20:10:26] INFO         OK - Fold 8: Train/val/test saved to fold_08/
+[2026-03-27 20:10:26] INFO       
+Step 7: Saving metadata...
+
+[2026-03-27 20:10:26] INFO         OK - Metadata saved to metadata.json
+[2026-03-27 20:10:26] INFO       
+================================================================================
+[2026-03-27 20:10:26] INFO       PHASE 3 COMPLETE
+[2026-03-27 20:10:26] INFO       ================================================================================
+
+[2026-03-27 20:10:26] INFO       Ready for Phase 4: Model Training
+[2026-03-29 01:09:30] INFO       Loading Silver layer windowed data...
+[2026-03-29 01:09:30] INFO       Loaded 143 samples with 20 columns
+
+[2026-03-29 01:09:30] INFO       Step 1: Flattening signal arrays and extracting time-domain features...
+[2026-03-29 01:09:30] INFO         Found 15 signal columns
+[2026-03-29 01:09:30] INFO         OK - Created 10 time-domain features
+
+[2026-03-29 01:09:30] INFO       Step 2: Computing derived features...
+[2026-03-29 01:09:30] INFO         OK - Added derived features
+
+[2026-03-29 01:09:30] INFO         Joined 15 raw signal columns for RNN export
+
+[2026-03-29 01:09:30] INFO       Step 3: Handling missing values...
+[2026-03-29 01:09:30] INFO         NaN values before imputation: 0
+[2026-03-29 01:09:30] INFO         NaN values after imputation: 0
+[2026-03-29 01:09:30] INFO         OK - Handled missing values
+
+[2026-03-29 01:09:30] INFO       Step 4: Encoding target variable...
+[2026-03-29 01:09:30] INFO         Target class distribution:
+[2026-03-29 01:09:30] INFO           - LOC: 96 (67.1%)
+[2026-03-29 01:09:30] INFO           - POST_ROC: 27 (18.9%)
+[2026-03-29 01:09:30] INFO           - PRE_LOC: 18 (12.6%)
+[2026-03-29 01:09:30] INFO           - BASELINE: 2 (1.4%)
+[2026-03-29 01:09:30] INFO         High-risk (PRE_LOC + LOC): 114 (79.7%)
+
+[2026-03-29 01:09:30] INFO       Step 5: Creating LOSO (Leave-One-Subject-Out) folds...
+[2026-03-29 01:09:30] INFO         9 subjects -> 9 LOSO folds
+
+[2026-03-29 01:09:30] INFO         Fold 0: Test=S1 | Train=98 | Val=25 | Test=20
+[2026-03-29 01:09:30] INFO         Fold 1: Test=S2 | Train=101 | Val=26 | Test=16
+[2026-03-29 01:09:30] INFO         Fold 2: Test=S3 | Train=101 | Val=26 | Test=16
+[2026-03-29 01:09:30] INFO         Fold 3: Test=S4 | Train=103 | Val=26 | Test=14
+[2026-03-29 01:09:30] INFO         Fold 4: Test=S5 | Train=103 | Val=26 | Test=14
+[2026-03-29 01:09:30] INFO         Fold 5: Test=S6 | Train=103 | Val=26 | Test=14
+[2026-03-29 01:09:30] INFO         Fold 6: Test=S7 | Train=102 | Val=26 | Test=15
+[2026-03-29 01:09:30] INFO         Fold 7: Test=S8 | Train=100 | Val=26 | Test=17
+[2026-03-29 01:09:30] INFO         Fold 8: Test=S9 | Train=100 | Val=26 | Test=17
+[2026-03-29 01:09:30] INFO       
+Step 6: Saving LOSO folds...
+
+[2026-03-29 01:09:31] INFO         OK - Fold 0: parquet + raw .npy saved to fold_00/
+[2026-03-29 01:09:31] INFO         OK - Fold 1: parquet + raw .npy saved to fold_01/
+[2026-03-29 01:09:31] INFO         OK - Fold 2: parquet + raw .npy saved to fold_02/
+[2026-03-29 01:09:31] INFO         OK - Fold 3: parquet + raw .npy saved to fold_03/
+[2026-03-29 01:09:31] INFO         OK - Fold 4: parquet + raw .npy saved to fold_04/
+[2026-03-29 01:09:31] INFO         OK - Fold 5: parquet + raw .npy saved to fold_05/
+[2026-03-29 01:09:31] INFO         OK - Fold 6: parquet + raw .npy saved to fold_06/
+[2026-03-29 01:09:31] INFO         OK - Fold 7: parquet + raw .npy saved to fold_07/
+[2026-03-29 01:09:31] INFO         OK - Fold 8: parquet + raw .npy saved to fold_08/
+[2026-03-29 01:09:31] INFO       
+Step 7: Saving metadata...
+
+[2026-03-29 01:09:31] INFO         OK - Metadata saved to metadata.json
+[2026-03-29 01:09:31] INFO       
+================================================================================
+[2026-03-29 01:09:31] INFO       PHASE 3 COMPLETE
+[2026-03-29 01:09:31] INFO       ================================================================================
+
+[2026-03-29 01:09:31] INFO       Ready for Phase 4: Model Training

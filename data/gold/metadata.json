@@ -1,0 +1,213 @@
+{
+  "pipeline": "gold_features",
+  "timestamp": "2026-03-29T01:09:31.519438",
+  "num_folds": 9,
+  "total_samples": 143,
+  "window_length_sec": 30,
+  "sample_rate_hz": 10,
+  "samples_per_window": 300,
+  "target_classes": [
+    "BASELINE",
+    "PRE_LOC",
+    "LOC",
+    "POST_ROC"
+  ],
+  "class_distribution": {
+    "LOC": 96,
+    "POST_ROC": 27,
+    "PRE_LOC": 18,
+    "BASELINE": 2
+  },
+  "high_risk_prevalence": 0.7972027972027972,
+  "folds": {
+    "0": {
+      "test_subject": 1,
+      "train_size": 98,
+      "val_size": 25,
+      "test_size": 20,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "1": {
+      "test_subject": 2,
+      "train_size": 101,
+      "val_size": 26,
+      "test_size": 16,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "2": {
+      "test_subject": 3,
+      "train_size": 101,
+      "val_size": 26,
+      "test_size": 16,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "3": {
+      "test_subject": 4,
+      "train_size": 103,
+      "val_size": 26,
+      "test_size": 14,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "4": {
+      "test_subject": 5,
+      "train_size": 103,
+      "val_size": 26,
+      "test_size": 14,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "5": {
+      "test_subject": 6,
+      "train_size": 103,
+      "val_size": 26,
+      "test_size": 14,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "6": {
+      "test_subject": 7,
+      "train_size": 102,
+      "val_size": 26,
+      "test_size": 15,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "7": {
+      "test_subject": 8,
+      "train_size": 100,
+      "val_size": 26,
+      "test_size": 17,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    },
+    "8": {
+      "test_subject": 9,
+      "train_size": 100,
+      "val_size": 26,
+      "test_size": 17,
+      "num_features": 10,
+      "feature_names": [
+        "eda_tonic_energy",
+        "eda_tonic_entropy",
+        "eda_tonic_kurtosis",
+        "eda_tonic_max",
+        "eda_tonic_mean",
+        "eda_tonic_min",
+        "eda_tonic_range",
+        "eda_tonic_rms",
+        "eda_tonic_skewness",
+        "eda_tonic_std"
+      ],
+      "rnn_channels": 15,
+      "rnn_timesteps": 300
+    }
+  }
+}

@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="03447da4-1035-42cc-a1ba-efd31399baeb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FaintDetectionPOC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FaintDetectionPOC.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_generation/visualize.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/visualize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_00/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_00/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_00/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_00/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_00/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_00/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_01/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_01/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_01/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_01/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_01/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_01/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_02/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_02/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_02/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_02/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_02/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_02/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_03/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_03/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_03/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_03/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_03/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_03/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_04/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_04/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_04/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_04/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_04/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_04/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_05/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_05/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_05/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_05/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_05/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_05/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_06/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_06/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_06/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_06/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_06/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_06/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_07/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_07/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_07/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_07/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_07/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_07/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_08/test.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_08/test.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_08/train.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_08/train.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/fold_08/val.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/fold_08/val.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/gold_features.log" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/gold_features.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/gold/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/gold/metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generation/human_data_pipeline/gold_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/human_data_pipeline/gold_features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generation/human_data_pipeline/silver_transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/human_data_pipeline/silver_transform.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generation/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generation/loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/rnn_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/rnn_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/loo_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/loo_trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +54,10 @@
       <entry key="_C:/Users/shayr/PycharmProjects/FaintDetectionPOC" value="3AOlFwBRuWWouccTQ3L0CixJwXy" />
     </persistenceIdMap>
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="38" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -24,7 +66,28 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="(feat)data-preparation-phase-0" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tal2tal2&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/shayro9/FaintDetectionPOC.git&quot;,
+    &quot;accountId&quot;: &quot;47d2c464-d1a9-4361-83ae-d1abaa14f29d&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -38,13 +101,23 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.data_generation.executor": "Run",
+    "Python.eda_phase0.executor": "Run",
+    "Python.gold_features.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.raw_data.executor": "Run",
+    "Python.silver_transform.executor": "Run",
+    "Python.train.executor": "Run",
+    "Python.validate_bronze.executor": "Run",
     "Python.visualize.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "#6 on (feat)data-preparation-phase-0",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -53,7 +126,30 @@
       <recent name="C:\Users\shayr\PycharmProjects\FaintDetectionPOC\data_generation" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.visualize">
+  <component name="RunManager">
+    <configuration name="eda_phase0" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="FaintDetectionPOC" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eda_phase0.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FaintDetectionPOC" />
       <option name="ENV_FILES" value="" />
@@ -67,8 +163,54 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="RUN_TOOL" value="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="C:\Users\shayr\PycharmProjects\FaintDetectionPOC\data_generation\main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="raw_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="FaintDetectionPOC" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/raw_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="validate_bronze" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="FaintDetectionPOC" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/validate_bronze.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -90,7 +232,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="RUN_TOOL" value="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_generation/visualize.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -102,6 +244,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.validate_bronze" />
+        <item itemvalue="Python.eda_phase0" />
+        <item itemvalue="Python.raw_data" />
         <item itemvalue="Python.visualize" />
         <item itemvalue="Python.main" />
       </list>
@@ -110,7 +255,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.142" />
+        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
       </set>
     </attachedChunks>
   </component>
@@ -121,8 +267,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772471398741</updated>
+      <workItem from="1774702827305" duration="3372000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -135,16 +285,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/data_generation/visualize.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/FaintDetectionPOC$train.coverage" NAME="train Coverage Results" MODIFIED="1774719814555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

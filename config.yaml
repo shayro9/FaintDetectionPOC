@@ -7,15 +7,17 @@ data:
 
 models:
   svm:
-    enabled: true
+    enabled: false
     input: "features"
+    pca_components: 0  # SVM benefits from full feature space; PCA can hurt margin geometry
     C: 1.0
     gamma: "scale"
     kernel: "rbf"
 
   rf:
-    enabled: true
+    enabled: false
     input: "features"
+    pca_components: 30
     n_estimators: 100
     max_depth: 4
     min_samples_leaf: 2
@@ -23,11 +25,12 @@ models:
   rnn:
     enabled: true
     input: "raw"
-    hidden_size: 32
-    num_layers: 1
+    pca_components: 30  # Raw temporal signals; PCA applied channel-wise loses temporal structure
+    hidden_size: 8
+    num_layers: 2
     dropout: 0.2
     lr: 0.001
-    max_epochs: 20 # small number to not overfit too much on the data
+    max_epochs: 50 # small number to not overfit too much on the data
 
 evaluation:
   threshold: 0.5
